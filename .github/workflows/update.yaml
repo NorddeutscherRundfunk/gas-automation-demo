@@ -1,0 +1,34 @@
+ame: update gas levels chart
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * *' #läuft täglich um 6 Uhr
+  workflow_dispatch:
+
+jobs:
+  update_data:
+    name: Update data with newest gas level numbers
+    runs-on: ubuntu-latest #ein virtueller computer wird aufgesetzt
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.4.0
+      
+      - name: Setup Python #python wird installiert
+        uses: actions/setup-python@v4.6.1
+        with:
+          python-version: '3.7'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt #libraries aus der requirements.txt werden installiert
+ 
+      - name: Run Script
+        env:
+            DATAWRAPPER_ACCESS_TOKEN: ${{ secrets.DATAWRAPPER_ACCESS_TOKEN }} #datawrapper api token wird in die umgebung geladen
+        run: |
+             python script.py
