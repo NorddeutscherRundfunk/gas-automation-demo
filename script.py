@@ -14,7 +14,7 @@ def process_data(df):
   df['Datum'] = df['Datum']+'2015' #Platzhalter-Jahreszahl einfügen für Datawrapper
   return df
 
-def publish_dw_chart(chart_id = CHART_ID, data=df):
+def publish_dw_chart(chart_id = CHART_ID, data):
   dw = Datawrapper()
   dw.add_data(chart_id = chart_id ,data=data)
   dw.publish_chart(chart_id = chart_id)
