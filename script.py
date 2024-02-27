@@ -3,7 +3,7 @@ import pandas as pd
 from datawrapper import Datawrapper
 
 #global variables
-CHART_ID = 'wG028'
+CHART_ID = 'Test'
 
 def get_data():
   df = pd.read_csv('https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=870304',sep=';',decimal =',')
