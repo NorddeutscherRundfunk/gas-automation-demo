@@ -11,7 +11,9 @@ def get_data():
 
 def process_data(df):
   df.columns = ['Datum','Letztes Jahr','Aktuell','Minimum 2018-2021','Maximum 2018-2021'] #Spaltennamen umbenennen
-  df['Datum'] = df['Datum']+'2015' #Platzhalter-Jahreszahl einfügen für Datawrapper
+  df['Datum'] = df['Datum']+'2016' #Platzhalter-Jahreszahl einfügen für Datawrapper
+  df['Datum'] = pd.to_datetime(df['Datum'],dayfirst=True)
+  df['Datum'] = df['Datum'].apply(lambda x: str(x).replace('2016','2017') if str(x) < '2016-04-01' else x)
   return df
 
 def publish_dw_chart(data, chart_id = CHART_ID):
